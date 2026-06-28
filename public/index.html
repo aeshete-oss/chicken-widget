@@ -385,20 +385,32 @@ const stages = [
     svg: `<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
       <ellipse cx="100" cy="172" rx="65" ry="14" fill="#C8DFC3"/>
       <path d="M40,172 Q52,158 64,168 Q76,156 88,166 Q100,155 112,166 Q124,156 136,168 Q148,158 160,172" fill="#B2C9AD"/>
-      <ellipse cx="100" cy="170" rx="32" ry="6" fill="rgba(0,0,0,0.04)"/>
-      <ellipse cx="100" cy="138" rx="30" ry="35" fill="#FFF8E1" stroke="#EEE0B5" stroke-width="1.5"/>
-      <polyline points="72,125 80,120 88,128 96,118 104,126 112,119 120,128 128,124" fill="none" stroke="#D4C896" stroke-width="1.5" stroke-linecap="round"/>
-      <polygon points="96,118 104,118 100,110" fill="#FF9800"/>
-      <circle cx="93" cy="114" r="3.5" fill="#5D4E37"/>
-      <circle cx="92" cy="113" r="1.2" fill="#fff"/>
-      <g transform="translate(125,100) rotate(15)" class="sparkle sparkle-d1">
-        <path d="M0,0 L8,-2 L6,6 Z" fill="#FFF8E1" stroke="#EEE0B5" stroke-width="0.8"/>
-      </g>
-      <g transform="translate(68,98) rotate(-20)" class="sparkle sparkle-d2">
-        <path d="M0,0 L7,1 L3,7 Z" fill="#FFF8E1" stroke="#EEE0B5" stroke-width="0.8"/>
-      </g>
-      <circle cx="140" cy="105" r="2.5" fill="#FFD54F" class="sparkle"/>
-      <circle cx="55" cy="115" r="2" fill="#FFD54F" class="sparkle sparkle-d3"/>
+      <ellipse cx="100" cy="170" rx="28" ry="5" fill="rgba(0,0,0,0.04)"/>
+      <!-- Bottom egg shell (bowl with jagged crack edge) -->
+      <path d="M72,170 C72,170 68,145 100,142 C132,145 128,170 128,170 L124,162 L118,170 L112,160 L106,168 L100,158 L94,168 L88,160 L82,170 L78,162 Z" fill="#FFF8E1" stroke="#EEE0B5" stroke-width="1.2"/>
+      <!-- Fluffy chick head poking out -->
+      <ellipse cx="100" cy="136" rx="18" ry="16" fill="#FFE082"/>
+      <ellipse cx="100" cy="138" rx="13" ry="11" fill="#FFF3C4" opacity="0.4"/>
+      <!-- Fluffy head tufts -->
+      <ellipse cx="97" cy="121" rx="3" ry="5" fill="#FFE082" transform="rotate(-10 97 121)"/>
+      <ellipse cx="103" cy="120" rx="3" ry="5" fill="#FFD54F" transform="rotate(10 103 120)"/>
+      <ellipse cx="100" cy="120" rx="2.5" ry="6" fill="#FFE082"/>
+      <!-- Big baby eyes -->
+      <circle cx="93" cy="133" r="4" fill="#5D4E37"/>
+      <circle cx="107" cy="133" r="4" fill="#5D4E37"/>
+      <circle cx="91.5" cy="131.5" r="1.5" fill="#fff"/>
+      <circle cx="105.5" cy="131.5" r="1.5" fill="#fff"/>
+      <!-- Tiny beak -->
+      <polygon points="98,139 102,139 100,143" fill="#FF9800"/>
+      <!-- Cheeks -->
+      <circle cx="85" cy="138" r="4" fill="#F5C6D0" opacity="0.3"/>
+      <circle cx="115" cy="138" r="4" fill="#F5C6D0" opacity="0.3"/>
+      <!-- Shell fragments on ground -->
+      <path d="M55,165 L50,155 L62,158 Z" fill="#FFF8E1" stroke="#EEE0B5" stroke-width="0.8"/>
+      <path d="M145,165 L150,155 L138,158 Z" fill="#FFF8E1" stroke="#EEE0B5" stroke-width="0.8"/>
+      <path d="M65,170 L60,163 L70,166 Z" fill="#FFF8E1" stroke="#EEE0B5" stroke-width="0.6"/>
+      <circle cx="52" cy="110" r="2.5" fill="#FFD54F" class="sparkle"/>
+      <circle cx="150" cy="115" r="2" fill="#FFD54F" class="sparkle sparkle-d1"/>
     </svg>`
   },
   /* ── 3: Baby Chick ── */
@@ -410,28 +422,40 @@ const stages = [
     svg: `<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
       <ellipse cx="100" cy="175" rx="65" ry="14" fill="#C8DFC3"/>
       <path d="M40,175 Q52,161 64,171 Q76,159 88,169 Q100,158 112,169 Q124,159 136,171 Q148,161 160,175" fill="#B2C9AD"/>
-      <ellipse cx="100" cy="173" rx="28" ry="5" fill="rgba(0,0,0,0.04)"/>
-      <ellipse cx="100" cy="142" rx="28" ry="30" fill="#FFE082"/>
-      <ellipse cx="100" cy="150" rx="18" ry="16" fill="#FFF3C4" opacity="0.6"/>
-      <ellipse cx="74" cy="140" rx="10" ry="14" fill="#FFD54F" stroke="#F0C850" stroke-width="0.8" transform="rotate(-10 74 140)"/>
-      <ellipse cx="126" cy="140" rx="10" ry="14" fill="#FFD54F" stroke="#F0C850" stroke-width="0.8" transform="rotate(10 126 140)"/>
-      <circle cx="89" cy="128" r="5" fill="#5D4E37"/>
-      <circle cx="111" cy="128" r="5" fill="#5D4E37"/>
-      <circle cx="87.5" cy="126.5" r="1.8" fill="#fff"/>
-      <circle cx="109.5" cy="126.5" r="1.8" fill="#fff"/>
-      <polygon points="96,135 104,135 100,142" fill="#FF9800"/>
-      <circle cx="80" cy="135" r="5" fill="#F5C6D0" opacity="0.35"/>
-      <circle cx="120" cy="135" r="5" fill="#F5C6D0" opacity="0.35"/>
+      <ellipse cx="100" cy="173" rx="22" ry="4" fill="rgba(0,0,0,0.04)"/>
+      <!-- Fluffy round body - soft puffball, NO wings -->
+      <circle cx="100" cy="148" r="26" fill="#FFE082"/>
+      <circle cx="100" cy="150" r="22" fill="#FFF3C4" opacity="0.35"/>
+      <!-- Soft fuzzy edge bumps for fluffiness -->
+      <circle cx="76" cy="148" r="5" fill="#FFE082"/>
+      <circle cx="124" cy="148" r="5" fill="#FFE082"/>
+      <circle cx="80" cy="158" r="4" fill="#FFE082"/>
+      <circle cx="120" cy="158" r="4" fill="#FFE082"/>
+      <circle cx="100" cy="172" r="4" fill="#FFE082"/>
+      <!-- Head merged with body -->
+      <circle cx="100" cy="128" r="16" fill="#FFE082"/>
+      <circle cx="100" cy="130" r="12" fill="#FFF3C4" opacity="0.3"/>
+      <!-- Fluffy crown tufts -->
+      <ellipse cx="97" cy="113" rx="3" ry="5" fill="#FFE082" transform="rotate(-8 97 113)"/>
+      <ellipse cx="103" cy="112" rx="3" ry="5" fill="#FFD54F" transform="rotate(8 103 112)"/>
+      <ellipse cx="100" cy="112" rx="2.5" ry="6" fill="#FFE082"/>
+      <!-- Big baby eyes -->
+      <circle cx="93" cy="126" r="4.5" fill="#5D4E37"/>
+      <circle cx="107" cy="126" r="4.5" fill="#5D4E37"/>
+      <circle cx="91.5" cy="124.5" r="1.6" fill="#fff"/>
+      <circle cx="105.5" cy="124.5" r="1.6" fill="#fff"/>
+      <!-- Beak -->
+      <polygon points="97,133 103,133 100,138" fill="#FF9800"/>
+      <!-- Cheeks -->
+      <circle cx="83" cy="132" r="4.5" fill="#F5C6D0" opacity="0.3"/>
+      <circle cx="117" cy="132" r="4.5" fill="#F5C6D0" opacity="0.3"/>
+      <!-- Tiny stick feet -->
       <g fill="none" stroke="#FF9800" stroke-width="1.5" stroke-linecap="round">
-        <path d="M88,170 L85,178 M88,170 L88,179 M88,170 L91,178"/>
-        <path d="M112,170 L109,178 M112,170 L112,179 M112,170 L115,178"/>
+        <path d="M92,173 L90,180 M92,173 L92,181 M92,173 L94,180"/>
+        <path d="M108,173 L106,180 M108,173 L108,181 M108,173 L110,180"/>
       </g>
-      <path d="M90,110 L95,100 L105,100 L110,110 L104,108 L100,112 L96,108 Z" fill="#FFF8E1" stroke="#EEE0B5" stroke-width="0.8"/>
-      <circle cx="55" cy="115" r="2.5" fill="#FFD54F" class="sparkle"/>
-      <circle cx="148" cy="120" r="2" fill="#FFD54F" class="sparkle sparkle-d1"/>
-      <g transform="translate(140,100) scale(0.45)" class="sparkle sparkle-d2" fill="#E8B4C8" opacity="0.5">
-        <path d="M12 4C8 0 0 0 0 6c0 6 12 14 12 14s12-8 12-14c0-6-8-6-12 0z"/>
-      </g>
+      <circle cx="55" cy="120" r="2.5" fill="#FFD54F" class="sparkle"/>
+      <circle cx="148" cy="115" r="2" fill="#FFD54F" class="sparkle sparkle-d1"/>
     </svg>`
   },
   /* ── 4: Growing Up ── */
@@ -443,32 +467,37 @@ const stages = [
     svg: `<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
       <ellipse cx="100" cy="178" rx="65" ry="14" fill="#C8DFC3"/>
       <path d="M40,178 Q52,164 64,174 Q76,162 88,172 Q100,161 112,172 Q124,162 136,174 Q148,164 160,178" fill="#B2C9AD"/>
-      <ellipse cx="100" cy="176" rx="28" ry="5" fill="rgba(0,0,0,0.04)"/>
-      <g transform="translate(125,120)">
-        <ellipse cx="8" cy="0" rx="4" ry="18" fill="#FFD54F" transform="rotate(20)"/>
-        <ellipse cx="12" cy="-2" rx="3.5" ry="16" fill="#FFE082" transform="rotate(30)"/>
-        <ellipse cx="4" cy="2" rx="3.5" ry="15" fill="#FFECB3" transform="rotate(10)"/>
+      <ellipse cx="100" cy="176" rx="26" ry="5" fill="rgba(0,0,0,0.04)"/>
+      <!-- Small tail feather sprouts -->
+      <ellipse cx="126" cy="130" rx="3" ry="10" fill="#FFD54F" transform="rotate(25 126 130)"/>
+      <ellipse cx="129" cy="128" rx="2.5" ry="8" fill="#FFE082" transform="rotate(35 129 128)"/>
+      <!-- Body (more oval, taller than baby) -->
+      <ellipse cx="100" cy="148" rx="26" ry="30" fill="#FFE082" stroke="#F0C850" stroke-width="0.8"/>
+      <ellipse cx="100" cy="154" rx="17" ry="18" fill="#FFF3C4" opacity="0.4"/>
+      <!-- Small natural wing nubs (curved, not flat ellipses) -->
+      <path d="M73,140 Q66,148 70,156 Q74,150 73,140" fill="#FFD54F" stroke="#F0C850" stroke-width="0.6"/>
+      <path d="M127,140 Q134,148 130,156 Q126,150 127,140" fill="#FFD54F" stroke="#F0C850" stroke-width="0.6"/>
+      <!-- Head (separate, on neck) -->
+      <circle cx="100" cy="108" r="18" fill="#FFE082" stroke="#F0C850" stroke-width="0.8"/>
+      <!-- Small comb starting -->
+      <path d="M95,91 Q98,85 100,91 Q102,85 105,91 Q102,93 100,91 Q98,93 95,91" fill="#EF5350"/>
+      <!-- Eyes -->
+      <circle cx="93" cy="106" r="4" fill="#5D4E37"/>
+      <circle cx="107" cy="106" r="4" fill="#5D4E37"/>
+      <circle cx="91.5" cy="104.5" r="1.4" fill="#fff"/>
+      <circle cx="105.5" cy="104.5" r="1.4" fill="#fff"/>
+      <!-- Beak -->
+      <polygon points="97,112 103,112 100,118" fill="#FF9800"/>
+      <!-- Cheeks -->
+      <circle cx="83" cy="110" r="4" fill="#F5C6D0" opacity="0.3"/>
+      <circle cx="117" cy="110" r="4" fill="#F5C6D0" opacity="0.3"/>
+      <!-- Bigger feet -->
+      <g fill="none" stroke="#FF9800" stroke-width="1.8" stroke-linecap="round">
+        <path d="M90,176 L87,185 M90,176 L90,186 M90,176 L93,185"/>
+        <path d="M110,176 L107,185 M110,176 L110,186 M110,176 L113,185"/>
       </g>
-      <ellipse cx="100" cy="140" rx="30" ry="34" fill="#FFE082" stroke="#F0C850" stroke-width="1"/>
-      <ellipse cx="100" cy="148" rx="20" ry="18" fill="#FFF3C4" opacity="0.5"/>
-      <path d="M68,130 Q58,140 62,155 Q68,148 74,155 Q72,140 68,130" fill="#FFD54F" stroke="#F0C850" stroke-width="0.8"/>
-      <path d="M132,130 Q142,140 138,155 Q132,148 126,155 Q128,140 132,130" fill="#FFD54F" stroke="#F0C850" stroke-width="0.8"/>
-      <circle cx="100" cy="105" r="22" fill="#FFE082" stroke="#F0C850" stroke-width="1"/>
-      <path d="M94,84 Q97,78 100,84 Q103,78 106,84 Q103,86 100,84 Q97,86 94,84" fill="#EF5350"/>
-      <circle cx="91" cy="102" r="4.5" fill="#5D4E37"/>
-      <circle cx="109" cy="102" r="4.5" fill="#5D4E37"/>
-      <circle cx="89.5" cy="100.5" r="1.6" fill="#fff"/>
-      <circle cx="107.5" cy="100.5" r="1.6" fill="#fff"/>
-      <polygon points="96,110 104,110 100,117" fill="#FF9800"/>
-      <circle cx="81" cy="108" r="4.5" fill="#F5C6D0" opacity="0.35"/>
-      <circle cx="119" cy="108" r="4.5" fill="#F5C6D0" opacity="0.35"/>
-      <g fill="none" stroke="#FF9800" stroke-width="2" stroke-linecap="round">
-        <path d="M88,172 L85,182 M88,172 L88,183 M88,172 L91,182"/>
-        <path d="M112,172 L109,182 M112,172 L112,183 M112,172 L115,182"/>
-      </g>
-      <circle cx="50" cy="95" r="2.5" fill="#FFD54F" class="sparkle"/>
-      <circle cx="152" cy="100" r="2" fill="#FFD54F" class="sparkle sparkle-d1"/>
-      <circle cx="145" cy="85" r="3" fill="#FFD54F" class="sparkle sparkle-d2"/>
+      <circle cx="52" cy="95" r="2.5" fill="#FFD54F" class="sparkle"/>
+      <circle cx="150" cy="100" r="2" fill="#FFD54F" class="sparkle sparkle-d1"/>
     </svg>`
   },
   /* ── 5: Golden Chicken ── */
@@ -485,34 +514,56 @@ const stages = [
       <ellipse cx="100" cy="180" rx="70" ry="14" fill="#C8DFC3"/>
       <path d="M35,180 Q48,166 60,176 Q73,164 85,174 Q98,162 110,174 Q123,164 135,176 Q148,166 165,180" fill="#B2C9AD"/>
       <ellipse cx="100" cy="178" rx="30" ry="5" fill="rgba(0,0,0,0.04)"/>
+      <!-- Broom handle (behind chicken) -->
+      <line x1="144" y1="76" x2="151" y2="178" stroke="#8B6914" stroke-width="2.8" stroke-linecap="round"/>
+      <!-- Broom bristles -->
+      <rect x="144" y="168" width="16" height="13" rx="2" fill="#DEB887" stroke="#C8A070" stroke-width="0.8"/>
+      <line x1="147" y1="169" x2="147" y2="180" stroke="#C8A070" stroke-width="0.5"/>
+      <line x1="150" y1="169" x2="150" y2="180" stroke="#C8A070" stroke-width="0.5"/>
+      <line x1="153" y1="169" x2="153" y2="180" stroke="#C8A070" stroke-width="0.5"/>
+      <line x1="156" y1="169" x2="156" y2="180" stroke="#C8A070" stroke-width="0.5"/>
+      <!-- Tail -->
       <g transform="translate(128,108)">
         <ellipse cx="10" cy="-5" rx="5" ry="25" fill="#FFD54F" transform="rotate(25)"/>
         <ellipse cx="16" cy="-8" rx="4.5" ry="22" fill="#FFE082" transform="rotate(35)"/>
         <ellipse cx="4" cy="-2" rx="4.5" ry="22" fill="#FFECB3" transform="rotate(15)"/>
         <ellipse cx="20" cy="-10" rx="4" ry="18" fill="#FFF3C4" transform="rotate(45)"/>
       </g>
+      <!-- Body -->
       <ellipse cx="100" cy="140" rx="32" ry="36" fill="url(#gold-body)" stroke="#E6A800" stroke-width="1"/>
       <ellipse cx="100" cy="140" rx="28" ry="32" fill="url(#gold-shine)"/>
       <ellipse cx="100" cy="150" rx="22" ry="20" fill="#FFF3C4" opacity="0.4"/>
+      <!-- Left wing (normal) -->
       <path d="M66,125 Q54,138 58,158 Q64,150 72,158 Q70,140 66,125" fill="#FFD54F" stroke="#E6A800" stroke-width="0.8"/>
-      <path d="M134,125 Q146,138 142,158 Q136,150 128,158 Q130,140 134,125" fill="#FFD54F" stroke="#E6A800" stroke-width="0.8"/>
+      <!-- Right wing (gripping broom - same style as brown chicken) -->
+      <path d="M132,120 Q144,124 148,130 Q150,140 147,152 Q142,146 137,155 Q134,136 132,120" fill="#FFD54F" stroke="#E6A800" stroke-width="0.8"/>
+      <!-- Handle in front of wing (grip) -->
+      <line x1="147" y1="126" x2="148" y2="148" stroke="#8B6914" stroke-width="2" stroke-linecap="round"/>
+      <!-- Head -->
       <circle cx="100" cy="98" r="24" fill="url(#gold-body)" stroke="#E6A800" stroke-width="1"/>
+      <!-- Comb -->
       <path d="M88,76 Q92,66 96,76 Q100,66 104,76 Q108,66 112,76 Q108,78 104,76 Q100,78 96,76 Q92,78 88,76" fill="#EF5350"/>
+      <!-- Wattle -->
       <ellipse cx="100" cy="120" rx="4" ry="6" fill="#EF5350" opacity="0.8"/>
+      <!-- Happy closed eyes -->
       <path d="M87,96 Q91,91 95,96" fill="none" stroke="#5D4E37" stroke-width="2.5" stroke-linecap="round"/>
       <path d="M105,96 Q109,91 113,96" fill="none" stroke="#5D4E37" stroke-width="2.5" stroke-linecap="round"/>
+      <!-- Beak -->
       <polygon points="96,104 104,104 100,112" fill="#FF9800"/>
+      <!-- Cheeks -->
       <circle cx="80" cy="102" r="5" fill="#F5C6D0" opacity="0.4"/>
       <circle cx="120" cy="102" r="5" fill="#F5C6D0" opacity="0.4"/>
+      <!-- Feet -->
       <g fill="none" stroke="#FF9800" stroke-width="2" stroke-linecap="round">
         <path d="M86,174 L83,185 M86,174 L86,186 M86,174 L89,185"/>
         <path d="M114,174 L111,185 M114,174 L114,186 M114,174 L117,185"/>
       </g>
+      <!-- Star -->
       <g class="sparkle" fill="#FFD54F">
         <polygon points="100,58 102,64 108,64 103,68 105,74 100,70 95,74 97,68 92,64 98,64"/>
       </g>
       <circle cx="48" cy="88" r="3" fill="#FFD54F" class="sparkle sparkle-d1"/>
-      <circle cx="155" cy="80" r="2.5" fill="#FFD54F" class="sparkle sparkle-d2"/>
+      <circle cx="38" cy="110" r="2.5" fill="#FFD54F" class="sparkle sparkle-d2"/>
       <g transform="translate(42,70) scale(0.4)" class="sparkle sparkle-d3" fill="#E8B4C8" opacity="0.6">
         <path d="M12 4C8 0 0 0 0 6c0 6 12 14 12 14s12-8 12-14c0-6-8-6-12 0z"/>
       </g>
@@ -675,17 +726,32 @@ const stages = [
           <path d="M6,28 L4,34 M6,28 L6,35 M6,28 L8,34"/>
         </g>
       </g>
-      <!-- Brown Chicken (right, fully grown) -->
+      <!-- Brown Chicken (right, fully grown, with feather duster) -->
       <g transform="translate(160,140)">
+        <!-- Feather duster handle (behind chicken) -->
+        <line x1="22" y1="-24" x2="24" y2="32" stroke="#8B6914" stroke-width="2" stroke-linecap="round"/>
+        <!-- Feather duster head (fluffy feathers) -->
+        <ellipse cx="21" cy="-26" rx="8" ry="5" fill="#C8A882" opacity="0.7"/>
+        <ellipse cx="19" cy="-29" rx="5" ry="4" fill="#DEB887"/>
+        <ellipse cx="23" cy="-31" rx="4.5" ry="3.5" fill="#D2B48C"/>
+        <ellipse cx="21" cy="-33" rx="3.5" ry="3" fill="#F5DEB3"/>
+        <ellipse cx="18" cy="-32" rx="3" ry="2.5" fill="#E8D5B8"/>
+        <!-- Tail -->
         <g transform="translate(-20,10)">
           <ellipse cx="8" cy="-5" rx="4" ry="18" fill="#C8A882" transform="rotate(20)"/>
           <ellipse cx="12" cy="-8" rx="3.5" ry="16" fill="#D2B48C" transform="rotate(30)"/>
           <ellipse cx="4" cy="-2" rx="3.5" ry="15" fill="#DEB887" transform="rotate(10)"/>
         </g>
+        <!-- Body -->
         <ellipse cx="0" cy="14" rx="18" ry="22" fill="#D2B48C" stroke="#B8956A" stroke-width="0.8"/>
         <ellipse cx="0" cy="18" rx="12" ry="12" fill="#F5DEB3" opacity="0.4"/>
+        <!-- Left wing (normal) -->
         <path d="M-16,6 Q-22,14 -19,26 Q-15,20 -11,26 Q-12,14 -16,6" fill="#C8A882"/>
-        <path d="M16,6 Q22,14 19,26 Q15,20 11,26 Q12,14 16,6" fill="#C8A882"/>
+        <!-- Right wing (gripping duster handle) -->
+        <path d="M14,4 Q22,6 25,10 Q26,16 24,24 Q20,20 16,26 Q14,14 14,4" fill="#C8A882"/>
+        <!-- Handle in front of wing (grip) -->
+        <line x1="23" y1="6" x2="24" y2="22" stroke="#8B6914" stroke-width="1.6" stroke-linecap="round"/>
+        <!-- Head -->
         <circle cx="0" cy="-6" r="14" fill="#D2B48C" stroke="#B8956A" stroke-width="0.8"/>
         <path d="M-6,-20 Q-3,-26 0,-20 Q3,-26 6,-20 Q3,-18 0,-20 Q-3,-18 -6,-20" fill="#EF5350"/>
         <ellipse cx="0" cy="10" rx="3" ry="4" fill="#EF5350" opacity="0.7"/>
@@ -716,7 +782,99 @@ const stages = [
     msg: "You completed 360 tasks! You're a cleaning legend!",
     anim: "anim-celebrate",
     nextAt: null,
-    svg: null
+    svg: `<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="cele-glow" cx="50%" cy="45%"><stop offset="0%" stop-color="#FFF8E1" stop-opacity="0.6"/><stop offset="100%" stop-color="#FFF8E1" stop-opacity="0"/></radialGradient>
+      </defs>
+      <!-- Glow behind everything -->
+      <circle cx="100" cy="100" r="90" fill="url(#cele-glow)"/>
+      <!-- Ground -->
+      <ellipse cx="100" cy="185" rx="95" ry="12" fill="#C8DFC3"/>
+      <path d="M10,185 Q25,173 40,183 Q55,172 70,182 Q85,170 100,182 Q115,172 130,182 Q145,173 160,183 Q175,173 190,185" fill="#B2C9AD"/>
+      <!-- House (center back) -->
+      <rect x="62" y="118" width="52" height="40" rx="3" fill="#FFECD2" stroke="#DEB887" stroke-width="1"/>
+      <polygon points="57,120 88,92 119,120" fill="#D4896A" stroke="#C07050" stroke-width="0.8"/>
+      <rect x="80" y="135" width="12" height="20" rx="2" fill="#A0522D"/>
+      <circle cx="90" cy="145" r="1.2" fill="#FFD54F"/>
+      <rect x="66" y="128" width="9" height="9" rx="1" fill="#87CEEB"/>
+      <rect x="98" y="128" width="9" height="9" rx="1" fill="#87CEEB"/>
+      <!-- Trophy (center, above house) -->
+      <g transform="translate(88,48)">
+        <rect x="6" y="30" width="12" height="4" rx="1" fill="#E6A800"/>
+        <rect x="4" y="33" width="16" height="3" rx="1" fill="#FFB300"/>
+        <path d="M6,8 Q6,28 12,30 Q18,28 18,8 Z" fill="#FFD54F" stroke="#E6A800" stroke-width="0.8"/>
+        <path d="M6,8 Q0,8 0,14 Q0,20 6,20" fill="none" stroke="#E6A800" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M18,8 Q24,8 24,14 Q24,20 18,20" fill="none" stroke="#E6A800" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M8,14 L10,18 L16,18 L12,21 L14,26 L10,22 L8,26 L9,21 L6,18 L11,18 Z" fill="#FFF8E1" opacity="0.7"/>
+        <rect x="4" y="6" width="16" height="3" rx="1" fill="#FFB300" stroke="#E6A800" stroke-width="0.5"/>
+      </g>
+      <!-- Golden Chicken (left) -->
+      <g transform="translate(32,148)">
+        <ellipse cx="0" cy="12" rx="15" ry="17" fill="#FFB300" stroke="#E6A800" stroke-width="0.8"/>
+        <ellipse cx="0" cy="16" rx="9" ry="9" fill="#FFF3C4" opacity="0.4"/>
+        <path d="M-13,5 Q-18,11 -15,20 Q-12,16 -9,20 Q-10,11 -13,5" fill="#FFD54F"/>
+        <path d="M13,5 Q18,11 15,20 Q12,16 9,20 Q10,11 13,5" fill="#FFD54F"/>
+        <circle cx="0" cy="-3" r="11" fill="#FFB300" stroke="#E6A800" stroke-width="0.8"/>
+        <path d="M-5,-14 Q-3,-19 0,-14 Q3,-19 5,-14 Q3,-12 0,-14 Q-3,-12 -5,-14" fill="#EF5350"/>
+        <path d="M-4,-5 Q-2,-8 0,-5" fill="none" stroke="#5D4E37" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M0,-5 Q2,-8 4,-5" fill="none" stroke="#5D4E37" stroke-width="1.5" stroke-linecap="round"/>
+        <polygon points="-2,2 2,2 0,5" fill="#FF9800"/>
+        <g fill="none" stroke="#FF9800" stroke-width="1.2" stroke-linecap="round">
+          <path d="M-5,27 L-7,33 M-5,27 L-5,34 M-5,27 L-3,33"/>
+          <path d="M5,27 L3,33 M5,27 L5,34 M5,27 L7,33"/>
+        </g>
+      </g>
+      <!-- Brown Chicken (right) -->
+      <g transform="translate(158,142)">
+        <g transform="translate(-18,8)">
+          <ellipse cx="7" cy="-4" rx="3.5" ry="16" fill="#C8A882" transform="rotate(20)"/>
+          <ellipse cx="11" cy="-7" rx="3" ry="14" fill="#D2B48C" transform="rotate(30)"/>
+          <ellipse cx="3" cy="-1" rx="3" ry="13" fill="#DEB887" transform="rotate(10)"/>
+        </g>
+        <ellipse cx="0" cy="13" rx="16" ry="20" fill="#D2B48C" stroke="#B8956A" stroke-width="0.8"/>
+        <ellipse cx="0" cy="17" rx="10" ry="10" fill="#F5DEB3" opacity="0.4"/>
+        <path d="M-14,5 Q-19,12 -16,22 Q-13,17 -10,22 Q-11,12 -14,5" fill="#C8A882"/>
+        <path d="M14,5 Q19,12 16,22 Q13,17 10,22 Q11,12 14,5" fill="#C8A882"/>
+        <circle cx="0" cy="-5" r="12" fill="#D2B48C" stroke="#B8956A" stroke-width="0.8"/>
+        <path d="M-5,-17 Q-3,-22 0,-17 Q3,-22 5,-17 Q3,-15 0,-17 Q-3,-15 -5,-17" fill="#EF5350"/>
+        <ellipse cx="0" cy="8" rx="2.5" ry="3.5" fill="#EF5350" opacity="0.7"/>
+        <path d="M-4,-7 Q-2,-10 0,-7" fill="none" stroke="#5D4E37" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M0,-7 Q2,-10 4,-7" fill="none" stroke="#5D4E37" stroke-width="1.5" stroke-linecap="round"/>
+        <polygon points="-1.5,0 1.5,0 0,4" fill="#FF9800"/>
+        <g fill="none" stroke="#FF9800" stroke-width="1.2" stroke-linecap="round">
+          <path d="M-6,31 L-8,38 M-6,31 L-6,39 M-6,31 L-4,38"/>
+          <path d="M6,31 L4,38 M6,31 L6,39 M6,31 L8,38"/>
+        </g>
+      </g>
+      <!-- Stars -->
+      <g fill="#FFD54F">
+        <polygon points="100,30 102,36 108,36 103,40 105,46 100,42 95,46 97,40 92,36 98,36" class="sparkle"/>
+        <polygon points="22,80 23,83 27,83 24,85 25,88 22,86 19,88 20,85 17,83 21,83" class="sparkle sd1"/>
+        <polygon points="178,75 179,78 183,78 180,80 181,83 178,81 175,83 176,80 173,78 177,78" class="sparkle sd2"/>
+        <polygon points="55,55 56,58 60,58 57,60 58,63 55,61 52,63 53,60 50,58 54,58" class="sparkle sd3"/>
+        <polygon points="148,50 149,53 153,53 150,55 151,58 148,56 145,58 146,55 143,53 147,53" class="sparkle"/>
+      </g>
+      <!-- Hearts -->
+      <g transform="translate(72,42) scale(0.35)" class="sparkle sd2" fill="#E8B4C8" opacity="0.7">
+        <path d="M12 4C8 0 0 0 0 6c0 6 12 14 12 14s12-8 12-14c0-6-8-6-12 0z"/>
+      </g>
+      <g transform="translate(125,38) scale(0.3)" class="sparkle sd3" fill="#E8B4C8" opacity="0.6">
+        <path d="M12 4C8 0 0 0 0 6c0 6 12 14 12 14s12-8 12-14c0-6-8-6-12 0z"/>
+      </g>
+      <g transform="translate(10,110) scale(0.3)" class="sparkle" fill="#E8B4C8" opacity="0.5">
+        <path d="M12 4C8 0 0 0 0 6c0 6 12 14 12 14s12-8 12-14c0-6-8-6-12 0z"/>
+      </g>
+      <g transform="translate(185,105) scale(0.25)" class="sparkle sd1" fill="#E8B4C8" opacity="0.5">
+        <path d="M12 4C8 0 0 0 0 6c0 6 12 14 12 14s12-8 12-14c0-6-8-6-12 0z"/>
+      </g>
+      <!-- Confetti dots -->
+      <circle cx="15" cy="50" r="2.5" fill="#B2C9AD" class="sparkle sd1"/>
+      <circle cx="185" cy="55" r="2" fill="#87CEEB" class="sparkle sd3"/>
+      <circle cx="40" cy="35" r="1.8" fill="#EF5350" opacity="0.6" class="sparkle"/>
+      <circle cx="165" cy="30" r="2" fill="#E8B4C8" class="sparkle sd2"/>
+      <circle cx="8" cy="140" r="1.5" fill="#FFD54F" class="sparkle sd1"/>
+      <circle cx="192" cy="145" r="1.8" fill="#B2C9AD" class="sparkle sd3"/>
+    </svg>`
   }
 ];
 
@@ -796,9 +954,12 @@ function renderConnect() {
 
 function renderCelebration(completed) {
   showConfetti(60);
+  const s = stages[10];
   document.getElementById('app').innerHTML = `
-    <div class="celebration">
-      <div class="big-trophy">&#x1F3C6;</div>
+    <div class="chicken-area anim-celebrate" style="width:220px;height:220px;">
+      ${s.svg}
+    </div>
+    <div class="celebration" style="padding:0 20px 20px;">
       <h2>You're a Cleaning Legend!</h2>
       <div class="stats">${completed}</div>
       <p>tasks completed!</p>
@@ -807,7 +968,6 @@ function renderCelebration(completed) {
         The counter resets &mdash; a new journey begins!
       </p>
     </div>`;
-  // Triple confetti waves
   setTimeout(() => showConfetti(40), 800);
   setTimeout(() => showConfetti(40), 1600);
 }
