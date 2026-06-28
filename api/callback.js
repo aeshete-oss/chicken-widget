@@ -67,16 +67,25 @@ export default async function handler(req, res) {
     <p>Your chicken is ready to grow.<br>You can close this window.</p>
   </div>
   <script>
-    // Store token
+    // Store token in localStorage (works when opened directly)
     try { localStorage.setItem('ck_token', '${data.access_token}'); } catch(e) {}
-    // Notify opener (the widget iframe or parent window)
+    // Notify opener (the widget iframe) via postMessage
     if (window.opener) {
-      window.opener.postMessage({ type: 'notion-auth', token: '${data.access_token}' }, '${origin}');
+      window.opener.postMessage({ type: 'notion-auth', token: '${data.access_token}' }, '*');
+      // Close popup after short delay
+      setTimeout(function() { window.close(); }, 2000);
     }
-    // Also redirect after delay (in case postMessage doesn't work)
-    setTimeout(function() {
-      window.location.href = '${origin}/?token=${data.access_token}';
-    }, 3000);
+    // Also try BroadcastChannel (works across same-origin tabs)
+    try {
+      var bc = new BroadcastChannel('chicken-widget');
+      bc.postMessage({ type: 'notion-auth', token: '${data.access_token}' });
+    } catch(e) {}
+    // Fallback: if popup wasn't opened via window.open, redirect
+    if (!window.opener) {
+      setTimeout(function() {
+        window.location.href = '${origin}/?token=${data.access_token}';
+      }, 3000);
+    }
   </script>
 </body>
 </html>`);
