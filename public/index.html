@@ -524,16 +524,22 @@ function showLevelUp(stage) {
 }
 
 // ─── RENDER ───
+function openAuth() {
+  const w = 500, h = 700;
+  const left = (screen.width - w) / 2, top = (screen.height - h) / 2;
+  window.open(`${API_BASE}/api/auth`, 'notion-auth', `width=${w},height=${h},left=${left},top=${top}`);
+}
+
 function renderConnect() {
   document.getElementById('app').innerHTML = `
     <div class="connect-screen">
       <div class="egg-icon">&#x1F95A;</div>
       <h2>Your Chicken is Waiting!</h2>
       <p>Connect your Notion to watch it grow as you clean.</p>
-      <a href="${API_BASE}/api/auth" class="connect-btn" target="_blank" rel="noopener">
+      <button onclick="openAuth()" class="connect-btn">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
         Connect to Notion
-      </a>
+      </button>
     </div>`;
 }
 
@@ -644,8 +650,22 @@ function init() {
       token = e.data.token;
       try { localStorage.setItem('ck_token', token); } catch(e2) {}
       fetchCount();
+      setInterval(fetchCount, 180000);
     }
   });
+
+  // BroadcastChannel fallback (same-origin tabs)
+  try {
+    var bc = new BroadcastChannel('chicken-widget');
+    bc.onmessage = function(e) {
+      if (e.data && e.data.type === 'notion-auth' && e.data.token) {
+        token = e.data.token;
+        try { localStorage.setItem('ck_token', token); } catch(e2) {}
+        fetchCount();
+        setInterval(fetchCount, 180000);
+      }
+    };
+  } catch(e) {}
 }
 
 init();
