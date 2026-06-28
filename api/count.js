@@ -1,5 +1,4 @@
 export default async function handler(req, res) {
-  // CORS headers for iframe embedding
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Headers', 'Authorization');
 
@@ -20,7 +19,6 @@ export default async function handler(req, res) {
   };
 
   try {
-    // 1. Search for databases the integration can access
     const searchRes = await fetch('https://api.notion.com/v1/search', {
       method: 'POST',
       headers: notionHeaders,
@@ -35,13 +33,13 @@ export default async function handler(req, res) {
 
     const searchData = await searchRes.json();
 
-    // 2. Find the cleaning tasks database
-    // Look for a database with a "Status" property (status type)
     const db = searchData.results?.find((d) => {
       const props = d.properties || {};
       return (
-        props.Status?.type === 'status' &&
-        (props.Room || props.Energy || props.Time || props.Task)
+        props.Category?.type === 'select' &&
+        props.Handled?.type === 'checkbox' &&
+        props.Energy?.type === 'select' &&
+        props.Room?.type === 'select'
       );
     });
 
@@ -54,73 +52,62 @@ export default async function handler(req, res) {
       });
     }
 
-    // 3. Query completed tasks (Status = "Erledigt" or "Done")
     let completed = 0;
-    let hasMore = true;
-    let startCursor = undefined;
 
-    while (hasMore) {
-      const body = {
-        filter: {
-          property: 'Status',
-          status: { equals: 'Erledigt' },
-        },
-        page_size: 100,
-      };
-      if (startCursor) body.start_cursor = startCursor;
+    for (const category of ['Cleaning', 'Doom Pile']) {
+      let hasMore = true;
+      let startCursor = undefined;
 
-      const qRes = await fetch(`https://api.notion.com/v1/databases/${db.id}/query`, {
-        method: 'POST',
-        headers: notionHeaders,
-        body: JSON.stringify(body),
-      });
-      const qData = await qRes.json();
-      completed += qData.results?.length || 0;
-      hasMore = qData.has_more;
-      startCursor = qData.next_cursor;
+      while (hasMore) {
+        const body = {
+          filter: {
+            and: [
+              { property: 'Handled', checkbox: { equals: true } },
+              { property: 'Category', select: { equals: category } },
+            ],
+          },
+          page_size: 100,
+        };
+        if (startCursor) body.start_cursor = startCursor;
+
+        const qRes = await fetch(`https://api.notion.com/v1/databases/${db.id}/query`, {
+          method: 'POST',
+          headers: notionHeaders,
+          body: JSON.stringify(body),
+        });
+        const qData = await qRes.json();
+        completed += qData.results?.length || 0;
+        hasMore = qData.has_more;
+        startCursor = qData.next_cursor;
+      }
     }
 
-    // 4. Also try "Done" as status name (English templates)
-    hasMore = true;
-    startCursor = undefined;
-    while (hasMore) {
-      const body = {
-        filter: {
-          property: 'Status',
-          status: { equals: 'Done' },
-        },
-        page_size: 100,
-      };
-      if (startCursor) body.start_cursor = startCursor;
-
-      const qRes = await fetch(`https://api.notion.com/v1/databases/${db.id}/query`, {
-        method: 'POST',
-        headers: notionHeaders,
-        body: JSON.stringify(body),
-      });
-      const qData = await qRes.json();
-      completed += qData.results?.length || 0;
-      hasMore = qData.has_more;
-      startCursor = qData.next_cursor;
-    }
-
-    // 5. Get total count
     let total = 0;
-    hasMore = true;
-    startCursor = undefined;
-    while (hasMore) {
-      const body = { page_size: 100 };
-      if (startCursor) body.start_cursor = startCursor;
 
-      const qRes = await fetch(`https://api.notion.com/v1/databases/${db.id}/query`, {
-        method: 'POST',
-        headers: notionHeaders,
-        body: JSON.stringify(body),
-      });
-      const qData = await qRes.json();
-      total += qData.results?.length || 0;
-      hasMore = qData.has_more;
-      startCursor = qData.next_cursor;
+    for (const category of ['Cleaning', 'Doom Pile']) {
+      let hasMore = true;
+      let startCursor = undefined;
+
+      while (hasMore) {
+        const body = {
+          filter: {
+            property: 'Category',
+            select: { equals: category },
+          },
+          page_size: 100,
+        };
+        if (startCursor) body.start_cursor = startCursor;
+
+        const qRes = await fetch(`https://api.notion.com/v1/databases/${db.id}/query`, {
+          method: 'POST',
+          headers: notionHeaders,
+          body: JSON.stringify(body),
+        });
+        const qData = await qRes.json();
+        total += qData.results?.length || 0;
+        hasMore = qData.has_more;
+        startCursor = qData.next_cursor;
+      }
     }
 
     res.json({ completed, total });
