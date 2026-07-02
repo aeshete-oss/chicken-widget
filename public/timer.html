@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Focus Timer</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: #FFFDF7;
+    color: #3D3D3D;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+  }
+
+  .timer-container {
+    text-align: center;
+    width: 100%;
+    max-width: 480px;
+    padding: 24px 20px;
+  }
+
+  /* Mode Toggle */
+  .mode-toggle {
+    display: flex;
+    background: #F5F0E8;
+    border-radius: 12px;
+    padding: 4px;
+    margin-bottom: 28px;
+    gap: 4px;
+  }
+  .mode-btn {
+    flex: 1;
+    padding: 10px 8px;
+    border: none;
+    border-radius: 10px;
+    background: transparent;
+    color: #8B7E6A;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    letter-spacing: 0.02em;
+  }
+  .mode-btn.active {
+    background: #fff;
+    color: #3D3D3D;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .mode-btn:hover:not(.active) {
+    color: #5D5344;
+  }
+
+  /* Timer Display */
+  .timer-ring-wrapper {
+    position: relative;
+    width: 220px;
+    height: 220px;
+    margin: 0 auto 28px;
+  }
+  .timer-ring {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+  }
+  .ring-bg {
+    fill: none;
+    stroke: #F5F0E8;
+    stroke-width: 6;
+  }
+  .ring-progress {
+    fill: none;
+    stroke: #E8A838;
+    stroke-width: 6;
+    stroke-linecap: round;
+    stroke-dasharray: 628.32;
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 1s linear, stroke 0.5s ease;
+  }
+  .ring-progress.break-mode {
+    stroke: #A8C5A0;
+  }
+  .timer-display {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  .time-text {
+    font-size: 52px;
+    font-weight: 300;
+    color: #3D3D3D;
+    letter-spacing: -2px;
+    font-variant-numeric: tabular-nums;
+  }
+  .timer-label {
+    font-size: 12px;
+    color: #B0A898;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-top: 4px;
+  }
+
+  /* Preset Buttons */
+  .presets {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  .preset-btn {
+    padding: 8px 18px;
+    border: 2px solid #F0E8D8;
+    border-radius: 20px;
+    background: transparent;
+    color: #8B7E6A;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+  .preset-btn.active {
+    border-color: #E8A838;
+    background: #FFF8ED;
+    color: #C48A20;
+  }
+  .preset-btn:hover:not(.active) {
+    border-color: #D8CCBA;
+    background: #FDFAF4;
+  }
+
+  /* Control Buttons */
+  .controls {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .ctrl-btn {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s ease;
+  }
+  .btn-start {
+    background: #E8A838;
+    box-shadow: 0 4px 14px rgba(232,168,56,0.3);
+  }
+  .btn-start:hover {
+    background: #D49A2E;
+    transform: scale(1.05);
+  }
+  .btn-start.running {
+    background: #E88B6A;
+    box-shadow: 0 4px 14px rgba(232,139,106,0.3);
+  }
+  .btn-start.running:hover {
+    background: #D47A5A;
+  }
+  .btn-reset {
+    background: #F5F0E8;
+  }
+  .btn-reset:hover {
+    background: #EBE4D8;
+    transform: scale(1.05);
+  }
+  .btn-start svg, .btn-reset svg {
+    width: 22px;
+    height: 22px;
+  }
+  .btn-start svg { fill: #fff; }
+  .btn-reset svg { fill: #8B7E6A; }
+
+  /* Pomodoro Info */
+  .pomo-info {
+    font-size: 13px;
+    color: #B0A898;
+    font-weight: 500;
+  }
+  .pomo-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 8px;
+  }
+  .pomo-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #F0E8D8;
+    transition: background 0.3s ease;
+  }
+  .pomo-dot.done {
+    background: #E8A838;
+  }
+  .pomo-dot.current {
+    background: #F5C542;
+    box-shadow: 0 0 8px rgba(245,197,66,0.4);
+  }
+
+  /* Break state */
+  .break-active .time-text { color: #6B9B5E; }
+  .break-active .timer-label { color: #A8C5A0; }
+  .break-active .btn-start {
+    background: #A8C5A0;
+    box-shadow: 0 4px 14px rgba(168,197,160,0.3);
+  }
+  .break-active .btn-start:hover { background: #8FB588; }
+  .break-active .btn-start.running {
+    background: #7BAA72;
+    box-shadow: 0 4px 14px rgba(123,170,114,0.3);
+  }
+</style>
+</head>
+<body>
+<div class="timer-container" id="app">
+  <!-- Mode Toggle -->
+  <div class="mode-toggle">
+    <button class="mode-btn active" onclick="setMode('quick')" id="mode-quick">Quick Timer</button>
+    <button class="mode-btn" onclick="setMode('pomodoro')" id="mode-pomo">Pomodoro</button>
+  </div>
+
+  <!-- Timer Ring -->
+  <div class="timer-ring-wrapper">
+    <svg class="timer-ring" viewBox="0 0 220 220">
+      <circle class="ring-bg" cx="110" cy="110" r="100"/>
+      <circle class="ring-progress" id="progress" cx="110" cy="110" r="100"/>
+    </svg>
+    <div class="timer-display">
+      <div class="time-text" id="time">25:00</div>
+      <div class="timer-label" id="label">focus</div>
+    </div>
+  </div>
+
+  <!-- Presets -->
+  <div class="presets" id="presets">
+    <button class="preset-btn" onclick="setPreset(2.5)">2:30</button>
+    <button class="preset-btn" onclick="setPreset(15)">15:00</button>
+    <button class="preset-btn active" onclick="setPreset(25)">25:00</button>
+  </div>
+
+  <!-- Controls -->
+  <div class="controls">
+    <button class="ctrl-btn btn-reset" onclick="resetTimer()" title="Reset">
+      <svg viewBox="0 0 24 24"><path d="M17.65 6.35A7.96 7.96 0 0 0 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08A5.99 5.99 0 0 1 12 18c-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>
+    </button>
+    <button class="ctrl-btn btn-start" id="startBtn" onclick="toggleTimer()">
+      <svg viewBox="0 0 24 24" id="startIcon"><polygon points="8,5 19,12 8,19"/></svg>
+    </button>
+  </div>
+
+  <!-- Pomodoro Info -->
+  <div id="pomoInfo" style="display:none;">
+    <div class="pomo-info" id="pomoText">Session 1 of 4</div>
+    <div class="pomo-dots" id="pomoDots">
+      <div class="pomo-dot current"></div>
+      <div class="pomo-dot"></div>
+      <div class="pomo-dot"></div>
+      <div class="pomo-dot"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  let mode = 'quick';
+  let totalSeconds = 25 * 60;
+  let remainingSeconds = totalSeconds;
+  let running = false;
+  let interval = null;
+  let pomoSession = 1;
+  let isBreak = false;
+  const CIRCUM = 2 * Math.PI * 100;
+
+  const $ = id => document.getElementById(id);
+  const progress = $('progress');
+  const timeEl = $('time');
+  const labelEl = $('label');
+  const startBtn = $('startBtn');
+  const startIcon = $('startIcon');
+  const app = $('app');
+
+  progress.style.strokeDasharray = CIRCUM;
+
+  function fmt(s) {
+    const m = Math.floor(s / 60);
+    const sec = s % 60;
+    return `${m}:${sec.toString().padStart(2, '0')}`;
+  }
+
+  function updateDisplay() {
+    timeEl.textContent = fmt(remainingSeconds);
+    const pct = 1 - (remainingSeconds / totalSeconds);
+    progress.style.strokeDashoffset = CIRCUM * (1 - pct);
+
+    if (isBreak) {
+      progress.classList.add('break-mode');
+      app.classList.add('break-active');
+    } else {
+      progress.classList.remove('break-mode');
+      app.classList.remove('break-active');
+    }
+  }
+
+  function setMode(m) {
+    mode = m;
+    stop();
+    isBreak = false;
+    pomoSession = 1;
+
+    document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+    $(m === 'quick' ? 'mode-quick' : 'mode-pomo').classList.add('active');
+
+    if (m === 'pomodoro') {
+      $('presets').style.display = 'none';
+      $('pomoInfo').style.display = 'block';
+      totalSeconds = 25 * 60;
+      labelEl.textContent = 'focus';
+      updatePomoDots();
+    } else {
+      $('presets').style.display = 'flex';
+      $('pomoInfo').style.display = 'none';
+      setPreset(25);
+    }
+    remainingSeconds = totalSeconds;
+    updateDisplay();
+  }
+
+  function setPreset(min) {
+    stop();
+    totalSeconds = min * 60;
+    remainingSeconds = totalSeconds;
+    labelEl.textContent = 'focus';
+    isBreak = false;
+    document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+    updateDisplay();
+  }
+
+  function toggleTimer() {
+    if (running) { stop(); }
+    else { start(); }
+  }
+
+  function start() {
+    running = true;
+    startBtn.classList.add('running');
+    startIcon.innerHTML = '<rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/>';
+
+    interval = setInterval(() => {
+      remainingSeconds--;
+      updateDisplay();
+      if (remainingSeconds <= 0) {
+        stop();
+        playSound();
+        if (mode === 'pomodoro') nextPomoPhase();
+      }
+    }, 1000);
+  }
+
+  function stop() {
+    running = false;
+    clearInterval(interval);
+    startBtn.classList.remove('running');
+    startIcon.innerHTML = '<polygon points="8,5 19,12 8,19"/>';
+  }
+
+  function resetTimer() {
+    stop();
+    if (mode === 'pomodoro') {
+      pomoSession = 1;
+      isBreak = false;
+      totalSeconds = 25 * 60;
+      labelEl.textContent = 'focus';
+      updatePomoDots();
+    }
+    remainingSeconds = totalSeconds;
+    updateDisplay();
+  }
+
+  function nextPomoPhase() {
+    if (!isBreak) {
+      // Focus done → start break
+      isBreak = true;
+      totalSeconds = (pomoSession % 4 === 0) ? 15 * 60 : 5 * 60;
+      labelEl.textContent = pomoSession % 4 === 0 ? 'long break' : 'break';
+    } else {
+      // Break done → next focus
+      isBreak = false;
+      pomoSession++;
+      if (pomoSession > 4) pomoSession = 1;
+      totalSeconds = 25 * 60;
+      labelEl.textContent = 'focus';
+    }
+    remainingSeconds = totalSeconds;
+    updatePomoDots();
+    updateDisplay();
+    // Auto-start next phase
+    setTimeout(() => start(), 800);
+  }
+
+  function updatePomoDots() {
+    const dots = $('pomoDots');
+    dots.innerHTML = '';
+    for (let i = 1; i <= 4; i++) {
+      const d = document.createElement('div');
+      d.className = 'pomo-dot';
+      if (i < pomoSession || (i === pomoSession && isBreak)) d.classList.add('done');
+      if (i === pomoSession && !isBreak) d.classList.add('current');
+      dots.appendChild(d);
+    }
+    $('pomoText').textContent = isBreak
+      ? (pomoSession % 4 === 0 ? 'Long break' : 'Short break')
+      : `Session ${pomoSession} of 4`;
+  }
+
+  function playSound() {
+    try {
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      const notes = [523.25, 659.25, 783.99]; // C5, E5, G5
+      notes.forEach((freq, i) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.value = freq;
+        gain.gain.setValueAtTime(0.15, ctx.currentTime + i * 0.2);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + i * 0.2 + 0.5);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(ctx.currentTime + i * 0.2);
+        osc.stop(ctx.currentTime + i * 0.2 + 0.5);
+      });
+    } catch(e) {}
+  }
+
+  updateDisplay();
+</script>
+</body>
+</html>
